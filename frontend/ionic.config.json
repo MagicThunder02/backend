@@ -1,0 +1,7 @@
+{
+  "name": "magic-finder",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

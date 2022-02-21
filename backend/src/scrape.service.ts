@@ -1,12 +1,13 @@
 import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
 import * as puppeteer from "puppeteer"
-import { CardDto } from './cards/dto/card.dto';
+import { map } from 'rxjs';
+import { CardDto } from './database/dto/card.dto';
 
 @Injectable()
 export class ScrapeService {
 
-  constructor() { }
+  constructor(public httpService: HttpService) { }
 
   private parsePrice(priceStr: string): number {
     priceStr = priceStr.slice(0, -2)
@@ -14,30 +15,28 @@ export class ScrapeService {
     return parseFloat(priceStr)
   }
 
-  public async scapeData(card: CardDto) {
+  public async scapeData(URL: string) {
 
-    const browser = await puppeteer.launch()
+    console.log("Start scraping");
+
+    const browser = await puppeteer.launch({ headless: true })
     const page = await browser.newPage()
 
-    await page.goto(card.link)
-
-
-    //fetching the name
-    card.name = await page.evaluate(() => {
-      let tags = document.querySelectorAll("h1")
-      return tags[0].innerText.split("\n")[0]
-    })
+    await page.goto(URL)
 
 
     //fetching the price
-    let priceStr = await page.evaluate(() => {
-      let tags = document.querySelectorAll("dd")
-      return tags[5].innerText
+    let prices = await page.evaluate(() => {
+      let divs = [...document.getElementsByClassName("col-price pr-sm-2")]
+      divs.shift()
+      let prices = divs.map(div => div.innerHTML)
+      return prices
     })
-    card.price = this.parsePrice(priceStr)
+
+    let priceArray = prices.map(price => this.parsePrice(price))
 
     await browser.close()
 
-    return card
+    return Math.max(...priceArray)
   }
 }

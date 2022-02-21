@@ -7,7 +7,7 @@ import { CardDto } from './dto/card.dto';
 
 
 @Injectable()
-export class CardsService {
+export class DBService {
   constructor(@InjectModel(Card.name) private cardModel: Model<CardDocument>) { }
 
   async create(createCardDto: CreateCardDto): Promise<Card> {

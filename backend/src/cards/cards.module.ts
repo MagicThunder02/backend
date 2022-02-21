@@ -1,15 +1,15 @@
 
+import { HttpModule } from '@nestjs/axios';
 import { Module } from '@nestjs/common';
-import { MongooseModule } from '@nestjs/mongoose';
-import { CardsService } from 'src/cards/cards.service';
-import { Card, CardSchema } from './schemas/card.schema';
+import { ScrapeService } from 'src/scrape.service';
+import { CardFinderService } from './cards-finder.service';
 import { CardsController } from './cards.controller';
 
 
 @Module({
-  imports: [MongooseModule.forFeature([{ name: Card.name, schema: CardSchema }])],
+  imports: [HttpModule],
   controllers: [CardsController],
-  providers: [CardsService],
-  exports: [CardsService]
+  providers: [CardFinderService, ScrapeService],
+  exports: [CardFinderService]
 })
 export class CardsModule { }

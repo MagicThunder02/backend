@@ -7,11 +7,15 @@ import { CardsModule } from './cards/cards.module';
 import { ScrapeService } from './scrape.service';
 import { MailerModule } from '@nestjs-modules/mailer';
 import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
+import { HttpModule } from '@nestjs/axios';
+import { DBModule } from './database/database.module';
 
 
 @Module({
   imports: [
     CardsModule,
+    DBModule,
+    HttpModule,
     ScheduleModule.forRoot(),
     MongooseModule.forRoot('mongodb://localhost/magic-finder'),
     MailerModule.forRoot({
