@@ -12,7 +12,8 @@ export class LoginGuard implements CanActivate {
 
   ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     let email = localStorage.getItem('email')
-    if (email) {
+    if (email != "undefined") {
+      console.log(email);
       return true
     }
 

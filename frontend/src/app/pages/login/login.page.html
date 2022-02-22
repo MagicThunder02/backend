@@ -1,6 +1,53 @@
 <ion-content [fullscreen]="true">
-  <ion-text color="primary">
-    <h1>Login</h1>
-  </ion-text>
+
+
+  <ion-grid style="height: 100%;">
+    <ion-row style="height: 100%;" class="ion-align-items-center ion-justify-content-center">
+      <ion-col size="12">
+
+
+        <ion-grid>
+          <ion-row>
+
+            <ion-col size="12" class="center title-container">
+              <ion-img src="assets/icons/magic-nobg.png" style="width: 200px; height: 200px;"></ion-img>
+              <ion-text class="title-text" color="dark"> MTG Toolbox </ion-text>
+            </ion-col>
+
+          </ion-row>
+          <ion-row>
+            <ion-col size="12" class="center">
+              <ion-text color="dark">
+                Welcome to MTG toolbox
+              </ion-text>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="12" class="center">
+              <ion-item color="light">
+                <ion-icon name="person" slot="start"></ion-icon>
+                <ion-label position="floating"><i>Email</i></ion-label>
+                <ion-input type="text" inputmode="text" [(ngModel)]="email" clear-input="true"></ion-input>
+              </ion-item>
+
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="12" class="center">
+              <ion-button (click)="login()" color="orange" fill="outline" shape="round">
+                Log in
+              </ion-button>
+            </ion-col>
+          </ion-row>
+
+        </ion-grid>
+
+
+      </ion-col>
+
+    </ion-row>
+  </ion-grid>
+
+
 
 </ion-content>

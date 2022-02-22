@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +6,17 @@ import { Component } from '@angular/core';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  constructor() {}
+  constructor() {
+
+    let darkmode = localStorage.getItem('darkmode')
+    console.log(darkmode);
+
+    if (darkmode == "true") {
+      document.body.setAttribute('color-theme', 'dark');
+    }
+    else {
+      document.body.setAttribute('color-theme', 'light');
+    }
+  }
+
 }

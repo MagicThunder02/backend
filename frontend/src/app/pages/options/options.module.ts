@@ -3,12 +3,12 @@ import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Tab2Page } from './tab2.page';
+import { OptionsPage } from './options.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: Tab2Page,
+    component: OptionsPage,
   }
 ];
 
@@ -19,6 +19,6 @@ const routes: Routes = [
     FormsModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [Tab2Page]
+  declarations: [OptionsPage]
 })
-export class Tab2PageModule { }
+export class OptionsPageModule { }

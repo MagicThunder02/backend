@@ -1,0 +1,21 @@
+.title-container {
+  font-family: playball;
+  font-size: 2rem;
+  position: relative;
+}
+
+.title-text {
+  position: absolute;
+  font-weight: bolder;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  }
+
+  ion-item.item-has-focus > ion-label{
+    color: var(--ion-color-orange) !important;
+  }
+
+.item-interactive.ion-valid {
+  --highlight-background: var(--ion-color-orange);
+}
