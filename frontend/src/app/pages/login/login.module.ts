@@ -2,15 +2,14 @@ import { IonicModule } from '@ionic/angular';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { HomePage } from './home.page';
-import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
 import { Routes, RouterModule } from '@angular/router';
 import { BackendService } from 'src/services/backend.service';
+import { LoginPage } from './login.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: HomePage
+    component: LoginPage
   }
 ];
 @NgModule({
@@ -18,10 +17,8 @@ const routes: Routes = [
     IonicModule,
     CommonModule,
     FormsModule,
-    ExploreContainerComponentModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [HomePage],
-  providers: [BackendService]
+  declarations: [LoginPage],
 })
-export class HomePageModule { }
+export class LoginPageModule { }

@@ -2,11 +2,11 @@ import { Component } from '@angular/core';
 import { BackendService } from 'src/services/backend.service';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss']
+  selector: 'app-list',
+  templateUrl: 'list.page.html',
+  styleUrls: ['list.page.scss']
 })
-export class HomePage {
+export class ListPage {
 
   cards = []
 

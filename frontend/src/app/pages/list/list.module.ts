@@ -1,26 +1,25 @@
 import { IonicModule } from '@ionic/angular';
-import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Tab2Page } from './tab2.page';
-import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
+import { ListPage } from './list.page';
+import { Routes, RouterModule } from '@angular/router';
+import { BackendService } from 'src/services/backend.service';
 
 const routes: Routes = [
   {
     path: '',
-    component: Tab2Page
+    component: ListPage
   }
 ];
-
 @NgModule({
   imports: [
     IonicModule,
     CommonModule,
     FormsModule,
-    ExploreContainerComponentModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [Tab2Page]
+  declarations: [ListPage],
+  providers: [BackendService]
 })
-export class Tab2PageModule { }
+export class ListPageModule { }

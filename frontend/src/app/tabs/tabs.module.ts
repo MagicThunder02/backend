@@ -13,16 +13,16 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'home',
+        redirectTo: 'list',
         pathMatch: 'full'
       },
       {
-        path: 'home',
-        loadChildren: () => import('../home/home.module').then(m => m.HomePageModule)
+        path: 'list',
+        loadChildren: () => import('../pages/list/list.module').then(m => m.ListPageModule)
       },
       {
         path: 'tab2',
-        loadChildren: () => import('../tab2/tab2.module').then(m => m.Tab2PageModule)
+        loadChildren: () => import('../pages/tab2/tab2.module').then(m => m.Tab2PageModule)
       }
     ],
 
@@ -36,6 +36,6 @@ const routes: Routes = [
     FormsModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [TabsPage]
+  declarations: [TabsPage],
 })
 export class TabsPageModule { }
