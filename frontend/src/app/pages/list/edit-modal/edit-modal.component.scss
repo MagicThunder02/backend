@@ -1,0 +1,19 @@
+ion-searchbar {
+    --background: var(--ion-color-light);
+    border: 2px solid var(--ion-color-medium);
+    --box-shadow: none;
+    border-radius: 15px;
+    --color: var(--ion-color-dark);
+    font-size: larger;
+    font-weight: bolder;
+}
+
+.item-list {
+    border: 2px solid var(--ion-color-dark);
+    border-radius: 15px;
+}
+
+.head-item {
+    border: 2px solid var(--ion-color-orange);
+    border-radius: 15px;
+}

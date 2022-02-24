@@ -9,7 +9,7 @@
 <ion-content [fullscreen]="true">
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button color="orange" (click)="presentModal()">
+    <ion-fab-button color="orange" (click)="presentAddModal()">
       <ion-icon name="add" size="large" color="light"></ion-icon>
     </ion-fab-button>
   </ion-fab>
@@ -47,7 +47,7 @@
             <ion-item-option color="danger" (click)="deleteCards(card.name)">
               <ion-icon name="trash-outline" size="large" color="light"></ion-icon>
             </ion-item-option>
-            <ion-item-option color="warning">
+            <ion-item-option color="warning" (click)="presentEditModal(card)">
               <ion-icon name="create-outline" size="large" color="light"></ion-icon>
             </ion-item-option>
           </ion-item-options>

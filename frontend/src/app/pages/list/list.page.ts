@@ -3,6 +3,7 @@ import { ModalController } from '@ionic/angular';
 import { BackendService } from 'src/services/backend.service';
 import { GlobalService } from 'src/services/global.service';
 import { AddModalComponent } from './add-modal/add-modal.component';
+import { EditModalComponent } from './edit-modal/edit-modal.component';
 
 @Component({
   selector: 'app-list',
@@ -40,19 +41,44 @@ export class ListPage {
   }
 
 
-  async presentModal() {
+  async presentAddModal() {
     const modal = await this.modalController.create({
       component: AddModalComponent,
       cssClass: 'fullscreen',
 
     });
-    modal.onDidDismiss().then(() => {
-      //carica la nuova card
-      this.listCards()
-      //dopo tre secondi carica il prezzo
-      setTimeout(() => {
+    modal.onDidDismiss().then((result) => {
+      console.log(result);
+      if (result.data == "OK") {
+        //carica la nuova card
         this.listCards()
-      }, 3000);
+        //dopo tre secondi carica il prezzo
+        setTimeout(() => {
+          this.listCards()
+        }, 3000);
+      }
+
+    });
+
+    return await modal.present();
+  }
+
+
+  async presentEditModal(card) {
+    const modal = await this.modalController.create({
+      component: EditModalComponent,
+      cssClass: 'fullscreen',
+      componentProps: {
+        card: card
+      }
+    });
+
+    modal.onDidDismiss().then((result) => {
+      console.log(result);
+      if (result.data == "OK") {
+        //carica la nuova card
+        this.listCards();
+      }
     });
 
     return await modal.present();

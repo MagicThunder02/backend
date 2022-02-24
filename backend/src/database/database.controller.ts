@@ -41,7 +41,12 @@ export class DBController {
       //update the db with the prices and links
       this.dbService.update(cardDto)
     })
+  }
 
+  @Post('update')
+  async update(@Body() cardDto: CardDto) {
+    console.log("update INIT", cardDto);
+    return this.dbService.update(cardDto)
   }
 
   @Post('delete')

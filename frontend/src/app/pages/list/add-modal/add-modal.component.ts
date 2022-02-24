@@ -12,13 +12,12 @@ export class AddModalComponent implements OnInit {
   public cards = []
   public threshold: number
 
-  constructor(private modalController: ModalController, private backend: BackendService, private alertController: AlertController) { }
+  constructor(public modalController: ModalController, private backend: BackendService, private alertController: AlertController) { }
 
   ngOnInit() { }
 
   public searchList(event) {
     this.backend.autocomplete(event.detail.value).subscribe(data => {
-      console.log(data);
       this.cards = data
     })
   }
@@ -35,11 +34,9 @@ export class AddModalComponent implements OnInit {
     }
     else {
 
-      this.backend.create(this.cards[0], this.threshold).subscribe(data => {
-        console.log(data);
-      })
+      this.backend.create(this.cards[0], this.threshold).subscribe()
 
-      this.modalController.dismiss()
+      this.modalController.dismiss('OK')
     }
 
   }

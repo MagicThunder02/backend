@@ -19,7 +19,7 @@ export class ScrapeService {
 
     console.log("Start scraping");
 
-    const browser = await puppeteer.launch({ headless: false })
+    const browser = await puppeteer.launch({ headless: true })
     const page = await browser.newPage()
 
     await page.goto(URL)
@@ -49,7 +49,7 @@ export class ScrapeService {
 
     console.log(price);
 
-    // await browser.close()
+    await browser.close()
 
 
     return this.parsePrice(price)

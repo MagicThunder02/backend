@@ -62,6 +62,23 @@ export class BackendService {
       );
   }
 
+  public update(name, threshold) {
+
+    let URL = this.URI + `/db/update`
+    let body = new HttpParams();
+
+    body = body.append('email', this.global.email);
+    body = body.append('name', name);
+    body = body.append('threshold', this.parsePrice(threshold));
+
+    console.log(URL);
+
+    return this.http.post<any>(URL, body, { headers: this.options })
+      .pipe(
+        catchError(async (error) => console.log(error))
+      );
+  }
+
   public autocomplete(search) {
 
     let URL = this.URI + `/cards/autocomplete?search=${search}`
