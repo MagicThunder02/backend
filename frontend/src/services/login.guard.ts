@@ -1,10 +1,11 @@
 import { Injectable } from "@angular/core";
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from "@angular/router";
 import { Observable } from "rxjs";
+import { GlobalService } from "./global.service";
 
 @Injectable()
 export class LoginGuard implements CanActivate {
-  constructor(public router: Router) { }
+  constructor(public router: Router, private global: GlobalService) { }
 
   canActivate(
     route: ActivatedRouteSnapshot,
@@ -12,8 +13,9 @@ export class LoginGuard implements CanActivate {
 
   ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     let email = localStorage.getItem('email')
-    if (email != "undefined") {
+    if (email != "undefined" && email != 'null' && email != '') {
       console.log(email);
+      this.global.email = email
       return true
     }
 

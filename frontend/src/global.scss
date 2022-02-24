@@ -48,6 +48,17 @@
   justify-content: center;
 }
 
+.centerV {
+  display: flex;
+  align-items: center;
+}
+
 ion-content, ion-header, ion-toolbar, ion-tabs, ion-tab-bar, ion-footer {
   --background: var(--ion-color-light);
 }
+
+ion-item {
+  --highlight-background: transparent;
+  caret-color: var(--ion-color-dark);
+}
+

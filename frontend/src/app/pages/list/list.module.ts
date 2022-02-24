@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { ListPage } from './list.page';
 import { Routes, RouterModule } from '@angular/router';
 import { BackendService } from 'src/services/backend.service';
+import { AddModalComponent } from './add-modal/add-modal.component';
 
 const routes: Routes = [
   {
@@ -19,7 +20,7 @@ const routes: Routes = [
     FormsModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [ListPage],
+  declarations: [ListPage, AddModalComponent],
   providers: [BackendService]
 })
 export class ListPageModule { }

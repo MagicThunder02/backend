@@ -19,24 +19,39 @@ export class ScrapeService {
 
     console.log("Start scraping");
 
-    const browser = await puppeteer.launch({ headless: true })
+    const browser = await puppeteer.launch({ headless: false })
     const page = await browser.newPage()
 
     await page.goto(URL)
 
 
     //fetching the price
-    let prices = await page.evaluate(() => {
+    //di solito il link punta a una pagina con una lista di prezzi, se puntasse ad un altra prova con la seconda
+    let price = await page.evaluate(() => {
+
+      let result
       let divs = [...document.getElementsByClassName("col-price pr-sm-2")]
-      divs.shift()
-      let prices = divs.map(div => div.innerHTML)
-      return prices
+
+      if (divs.length != 0) {
+        //prima pagina
+        divs.shift()
+        result = divs[0].innerHTML
+      }
+      else {
+        //seconda pagina
+        divs = [...document.getElementsByClassName("col-6 col-xl-7")]
+        console.log(divs);
+        result = divs[4].innerHTML
+      }
+
+      return result
     })
 
-    let priceArray = prices.map(price => this.parsePrice(price))
+    console.log(price);
 
-    await browser.close()
+    // await browser.close()
 
-    return Math.max(...priceArray)
+
+    return this.parsePrice(price)
   }
 }

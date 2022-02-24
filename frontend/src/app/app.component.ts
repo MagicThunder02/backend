@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { GlobalService } from 'src/services/global.service';
 
 @Component({
   selector: 'app-root',
@@ -6,15 +7,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  constructor() {
+  constructor(private global: GlobalService) {
 
     let darkmode = localStorage.getItem('darkmode')
-    console.log(darkmode);
 
     if (darkmode == "true") {
+      this.global.darkmode = 'true'
       document.body.setAttribute('color-theme', 'dark');
     }
     else {
+      this.global.darkmode = 'false'
       document.body.setAttribute('color-theme', 'light');
     }
   }

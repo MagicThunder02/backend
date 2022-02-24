@@ -16,11 +16,11 @@ export class DBService {
   }
 
   async update(cardDto: CardDto): Promise<any> {
-    return this.cardModel.updateMany({ link: cardDto.link, email: cardDto.email }, cardDto).exec();
+    return this.cardModel.updateMany({ email: cardDto.email, name: cardDto.name }, cardDto).exec();
   }
 
-  async delete(link: string): Promise<any> {
-    return this.cardModel.deleteMany({ link: link }).exec();
+  async delete(body): Promise<any> {
+    return this.cardModel.deleteMany(body).exec();
   }
 
   async findAll(): Promise<Card[]> {

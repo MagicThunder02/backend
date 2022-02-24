@@ -9,6 +9,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginPageModule } from './pages/login/login.module';
 
+import { HttpClientModule } from '@angular/common/http';
+import { GlobalService } from 'src/services/global.service';
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -16,11 +19,13 @@ import { LoginPageModule } from './pages/login/login.module';
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
-    LoginPageModule
+    LoginPageModule,
+    HttpClientModule
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    LoginGuard
+    LoginGuard,
+    GlobalService
   ],
   bootstrap: [AppComponent],
 })
