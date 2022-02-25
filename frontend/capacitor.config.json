@@ -1,6 +1,6 @@
 {
-	"appId": "io.ionic.starter",
-	"appName": "magic-finder",
-	"webDir": "www",
-	"bundledWebRuntime": false
+  "appId": "io.ionic.starter",
+  "appName": "MTG-Toolbox",
+  "webDir": "www",
+  "bundledWebRuntime": false
 }

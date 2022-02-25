@@ -17,7 +17,7 @@ export class ScrapeService {
 
   public async scapeData(URL: string) {
 
-    console.log("Start scraping");
+    // console.log("Start scraping");
 
     const browser = await puppeteer.launch({ headless: true })
     const page = await browser.newPage()
@@ -40,17 +40,13 @@ export class ScrapeService {
       else {
         //seconda pagina
         divs = [...document.getElementsByClassName("col-6 col-xl-7")]
-        console.log(divs);
         result = divs[4].innerHTML
       }
 
       return result
     })
 
-    console.log(price);
-
     await browser.close()
-
 
     return this.parsePrice(price)
   }

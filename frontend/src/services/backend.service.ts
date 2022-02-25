@@ -7,7 +7,8 @@ import { GlobalService } from "./global.service";
 @Injectable()
 export class BackendService {
 
-  private URI = 'http://localhost:3000';
+  private URI = '79.20.207.41:3000';
+  // private URI = 'http://localhost:3000';
   private options: HttpHeaders = new HttpHeaders().set('Content-type', 'application/x-www-form-urlencoded');
 
 
