@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { GlobalService } from 'src/services/global.service';
 
 @Component({
@@ -10,7 +11,7 @@ export class OptionsPage {
 
   public darkmode
 
-  constructor(public global: GlobalService) {
+  constructor(public global: GlobalService, private router: Router) {
     this.darkmode = localStorage.getItem('darkmode')
   }
 
@@ -28,6 +29,11 @@ export class OptionsPage {
       localStorage.setItem('darkmode', 'false');
     }
 
+  }
+
+  public logOut() {
+    localStorage.removeItem('email')
+    this.router.navigateByUrl('/login');
   }
 
 }

@@ -1,18 +1,23 @@
 import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { catchError, map, tap } from 'rxjs/operators';
+import { environment } from "src/environments/environment";
 import { GlobalService } from "./global.service";
 
 
 @Injectable()
 export class BackendService {
 
-  private URI = '79.20.207.41:3000';
-  // private URI = 'http://localhost:3000';
+  // private URI = '192.168.1.52:3000';
+  private URI = 'http://localhost:3000';
   private options: HttpHeaders = new HttpHeaders().set('Content-type', 'application/x-www-form-urlencoded');
 
 
   constructor(public http: HttpClient, private global: GlobalService,) { }
+
+  public apiUrl() {
+    return environment.backend
+  }
 
   private parsePrice(priceStr: string): number {
     priceStr = priceStr.replace(",", ".")

@@ -4,7 +4,6 @@ import { CardService } from 'src/cards/cards.service';
 import { ScrapeService } from 'src/scrape.service';
 import { DBService } from './database.service';
 import { CardDto } from './dto/card.dto';
-import { CreateCardDto } from './dto/create-card.dto';
 
 @Controller('db')
 export class DBController {

@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar class="center">
-    <ion-title color="dark">
+    <ion-title color="dark" class="ion-text-center">
       Options
     </ion-title>
   </ion-toolbar>
@@ -16,3 +16,9 @@
   </ion-item>
 
 </ion-content>
+
+<ion-footer>
+  <ion-button color="orange" (click)="logOut()" expand="block" fill="outline" style="--border-radius: 15px;">
+    Log Out
+  </ion-button>
+</ion-footer>
