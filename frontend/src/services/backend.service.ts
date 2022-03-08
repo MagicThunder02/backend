@@ -26,7 +26,7 @@ export class BackendService {
 
   public list() {
 
-    let URL = this.URI + `/db/email?email=${this.global.email}`
+    let URL = this.apiUrl() + `/db/email?email=${this.global.email}`
     console.log(URL);
 
     return this.http.get<any>(URL, { headers: this.options })
@@ -37,7 +37,7 @@ export class BackendService {
 
   public delete(name) {
 
-    let URL = this.URI + `/db/delete`
+    let URL = this.apiUrl() + `/db/delete`
     let body = new HttpParams();
 
     body = body.append('email', this.global.email);
@@ -53,7 +53,7 @@ export class BackendService {
 
   public create(name, threshold) {
 
-    let URL = this.URI + `/db/create`
+    let URL = this.apiUrl() + `/db/create`
     let body = new HttpParams();
 
     body = body.append('email', this.global.email);
@@ -70,7 +70,7 @@ export class BackendService {
 
   public update(name, threshold) {
 
-    let URL = this.URI + `/db/update`
+    let URL = this.apiUrl() + `/db/update`
     let body = new HttpParams();
 
     body = body.append('email', this.global.email);
@@ -87,7 +87,7 @@ export class BackendService {
 
   public autocomplete(search) {
 
-    let URL = this.URI + `/cards/autocomplete?search=${search}`
+    let URL = this.apiUrl() + `/cards/autocomplete?search=${search}`
     console.log(URL);
 
     return this.http.get<any>(URL, { headers: this.options })

@@ -17,7 +17,7 @@ import { DBModule } from './database/database.module';
     DBModule,
     HttpModule,
     ScheduleModule.forRoot(),
-    MongooseModule.forRoot('mongodb://localhost/magic-finder'),
+    MongooseModule.forRoot('mongodb://localhost/mtg-toolbox'),
     MailerModule.forRoot({
       transport: {
         host: 'in-v3.mailjet.com',
