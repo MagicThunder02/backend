@@ -7,10 +7,15 @@ import { DBController } from './database.controller';
 import { ScrapeService } from 'src/scrape.service';
 import { HttpModule } from '@nestjs/axios';
 import { CardService } from 'src/cards/cards.service';
+import { ConfigModule } from '@nestjs/config';
 
 
 @Module({
-  imports: [MongooseModule.forFeature([{ name: Card.name, schema: CardSchema }]), HttpModule],
+  imports: [
+    MongooseModule.forFeature([{ name: Card.name, schema: CardSchema }]),
+    HttpModule,
+    ConfigModule.forRoot()
+  ],
   controllers: [DBController],
   providers: [DBService, ScrapeService, CardService],
   exports: [DBService]

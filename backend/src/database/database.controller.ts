@@ -12,6 +12,7 @@ export class DBController {
 
   @Get('list')
   async findAll() {
+    console.log("Listing");
     return await this.dbService.findAll()
   }
 
@@ -23,7 +24,7 @@ export class DBController {
 
   @Post('create')
   async create(@Body() cardDto: CardDto) {
-    console.log("create INIT", cardDto);
+    // console.log("create INIT", cardDto);
 
 
     //creo la carta nel db
@@ -31,7 +32,7 @@ export class DBController {
 
     //richiedo il link a scryfall
     this.cardService.getCardLink(cardDto.name).subscribe(async link => {
-      console.log(link);
+      // console.log(link);
 
       //get link and card price
       cardDto.link = link
@@ -44,13 +45,21 @@ export class DBController {
 
   @Post('update')
   async update(@Body() cardDto: CardDto) {
-    console.log("update INIT", cardDto);
+    // console.log("update INIT", cardDto);
+
+    console.log(cardDto);
+    cardDto.price = await this.scrapeService.scapeData(cardDto.link)
+
+    console.log("updated ", cardDto);
+
+    //update the db with the prices and links
     return this.dbService.update(cardDto)
   }
 
   @Post('delete')
   async delete(@Body() body) {
-    console.log(body);
+    // console.log(body);
+    console.log("cancellata", body);
     return await this.dbService.delete(body);
   }
 }

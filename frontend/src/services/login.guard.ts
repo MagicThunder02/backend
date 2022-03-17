@@ -13,8 +13,8 @@ export class LoginGuard implements CanActivate {
 
   ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     let email = localStorage.getItem('email')
-    if (email != "undefined" && email != 'null' && email != '') {
-      console.log(email);
+    if (email != "null" && email != null) {
+      console.log("l'email è: ", email);
       this.global.email = email
       return true
     }

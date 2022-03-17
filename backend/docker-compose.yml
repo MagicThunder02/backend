@@ -13,9 +13,20 @@ services:
       - myNetwok
     restart: unless-stopped
 
+  #mtg-toolbox site
+  magic:
+    build:
+      context: ./
+    image: matteosavina/mtg-toolbox-v1.0
+    environment:
+      - DBPATH=mongodb://mongo/mtg-toolbox
+    ports:
+      - 8080:8080
+    networks:
+      - myNetwok
+
 volumes:
-  mongo_data:
- # user defined network
+  mongo_data: # user defined network
 networks:
   myNetwok:
     name: myNetwok

@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   frontend: 'http://localhost:8100',
-  backend: 'http://192.168.1.52:3000',
+  backend: 'http://localhost:8080',
 };
 
 /*

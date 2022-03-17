@@ -19,7 +19,10 @@ export class ScrapeService {
 
     // console.log("Start scraping");
 
-    const browser = await puppeteer.launch({ headless: true })
+    const browser = await puppeteer.launch({
+      executablePath: process.env.CHROME_BIN || null,
+      args: ['--no-sandbox', '--headless', '--disable-gpu']
+    })
     const page = await browser.newPage()
 
     await page.goto(URL)

@@ -8,8 +8,6 @@ import { GlobalService } from "./global.service";
 @Injectable()
 export class BackendService {
 
-  // private URI = '192.168.1.52:3000';
-  private URI = 'http://localhost:3000';
   private options: HttpHeaders = new HttpHeaders().set('Content-type', 'application/x-www-form-urlencoded');
 
 
@@ -20,6 +18,7 @@ export class BackendService {
   }
 
   private parsePrice(priceStr: string): number {
+    priceStr = priceStr.toString()
     priceStr = priceStr.replace(",", ".")
     return parseFloat(priceStr)
   }
