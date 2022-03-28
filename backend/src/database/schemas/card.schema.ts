@@ -5,6 +5,10 @@ export type CardDocument = Card & Document;
 
 @Schema()
 export class Card {
+
+    @Prop()
+    id: string;
+
     @Prop()
     email: string;
 

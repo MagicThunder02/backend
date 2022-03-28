@@ -13,13 +13,14 @@ export class LoginPage {
   constructor(public router: Router) { }
 
   ionViewWillEnter() {
-    this.email = localStorage.getItem('email')
+    // this.email = localStorage.getItem('email').trim()
     // console.log(this.email);
   }
 
   public login() {
-
-    localStorage.setItem('email', this.email)
+    if (this.email) {
+      localStorage.setItem('email', this.email.trim())
+    }
 
     this.router.navigateByUrl('/list')
 

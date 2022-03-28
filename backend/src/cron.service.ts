@@ -2,6 +2,7 @@ import { MailerService } from '@nestjs-modules/mailer';
 import { Injectable } from '@nestjs/common';
 import { Cron, CronExpression } from '@nestjs/schedule';
 import { DBService } from './database/database.service';
+import { CardDto } from './database/dto/card.dto';
 import { ScrapeService } from './scrape.service';
 
 @Injectable()
@@ -16,9 +17,9 @@ export class CronService {
 
     let cards = await this.dbService.findAll()
 
-    for (let card of cards) {
+    cards.forEach(async (card: CardDto) => {
 
-      card.price = await this.scrapeService.scapeData(card.link)
+      card.price = await this.scrapeService.scrapeData(card.link)
 
       if (card.price <= card.threshold) {
 
@@ -43,7 +44,7 @@ export class CronService {
       }
 
       this.dbService.update(card)
-    }
+    })
   }
 }
 

@@ -55,7 +55,7 @@ export class ListPage {
         //dopo tre secondi carica il prezzo
         setTimeout(() => {
           this.listCards()
-        }, 3000);
+        }, 5000);
       }
 
     });

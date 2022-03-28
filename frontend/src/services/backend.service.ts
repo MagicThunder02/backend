@@ -24,9 +24,10 @@ export class BackendService {
   }
 
   public list() {
-
-    let URL = this.apiUrl() + `/db/email?email=${this.global.email}`
+    let email = localStorage.getItem('email')
+    let URL = this.apiUrl() + `/db/email?email=${email}`
     console.log(URL);
+
 
     return this.http.get<any>(URL, { headers: this.options })
       .pipe(
@@ -39,7 +40,7 @@ export class BackendService {
     let URL = this.apiUrl() + `/db/delete`
     let body = new HttpParams();
 
-    body = body.append('email', this.global.email);
+    body = body.append('email', this.global.getEmail());
     body = body.append('name', name);
 
     console.log(URL);
@@ -55,7 +56,7 @@ export class BackendService {
     let URL = this.apiUrl() + `/db/create`
     let body = new HttpParams();
 
-    body = body.append('email', this.global.email);
+    body = body.append('email', this.global.getEmail());
     body = body.append('name', name);
     body = body.append('threshold', this.parsePrice(threshold));
 
@@ -67,16 +68,24 @@ export class BackendService {
       );
   }
 
-  public update(name, threshold) {
+  public update(card) {
 
     let URL = this.apiUrl() + `/db/update`
     let body = new HttpParams();
 
-    body = body.append('email', this.global.email);
-    body = body.append('name', name);
-    body = body.append('threshold', this.parsePrice(threshold));
+    console.log('card', card, Object.keys(card));
+
+    Object.keys(card).forEach(key => {
+      body = body.append(key, card[key])
+      console.log(key, card[key]);
+    })
+    // body = body.append('email', this.global.getEmail());
+    // body = body.append('name', card.name);
+    // body = body.append('_id', card._id);
+    // body = body.append('threshold', this.parsePrice(card.threshold));
 
     console.log(URL);
+    console.log('body', body);
 
     return this.http.post<any>(URL, body, { headers: this.options })
       .pipe(

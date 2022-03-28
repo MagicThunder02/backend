@@ -24,7 +24,7 @@ export class EditModalComponent implements OnInit {
     }
     else {
 
-      this.backend.update(this.card.name, this.card.threshold).subscribe()
+      this.backend.update(this.card).subscribe()
 
       this.modalController.dismiss('OK')
     }

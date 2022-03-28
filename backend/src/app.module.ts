@@ -9,6 +9,8 @@ import { MailerModule } from '@nestjs-modules/mailer';
 import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
 import { HttpModule } from '@nestjs/axios';
 import { DBModule } from './database/database.module';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 
 
 @Module({
@@ -17,7 +19,7 @@ import { DBModule } from './database/database.module';
     DBModule,
     HttpModule,
     ScheduleModule.forRoot(),
-    MongooseModule.forRoot('mongodb://localhost/mtg-toolbox'),
+    MongooseModule.forRoot(process.env.DBPATH),
     MailerModule.forRoot({
       transport: {
         host: 'in-v3.mailjet.com',
@@ -38,6 +40,10 @@ import { DBModule } from './database/database.module';
           strict: true,
         },
       },
+    }),
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'client'),
+      exclude: ['/cards*', '/db*'],
     }),
   ],
   controllers: [AppController],

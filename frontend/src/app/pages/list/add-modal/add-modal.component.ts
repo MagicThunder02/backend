@@ -34,9 +34,10 @@ export class AddModalComponent implements OnInit {
     }
     else {
 
-      this.backend.create(this.cards[0], this.threshold).subscribe()
-
-      this.modalController.dismiss('OK')
+      this.backend.create(this.cards[0], this.threshold).subscribe((result) => {
+        console.log("finished", result);
+        this.modalController.dismiss('OK')
+      })
     }
 
   }

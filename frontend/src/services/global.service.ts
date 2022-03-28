@@ -6,7 +6,11 @@ import { Injectable, OnInit } from '@angular/core';
 export class GlobalService {
 
   public darkmode: string = 'false';
-  public email: string
 
   constructor() { }
+
+
+  public getEmail(): string {
+    return localStorage.getItem('email').trim()
+  }
 }

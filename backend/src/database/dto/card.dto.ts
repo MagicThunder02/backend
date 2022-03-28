@@ -4,4 +4,6 @@ export class CardDto {
     link: string;
     price: number;
     threshold: number;
+    _id?: string
+    // id: string;
 }

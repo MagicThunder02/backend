@@ -18,6 +18,9 @@
 </ion-content>
 
 <ion-footer>
+  <ion-text class="center" color="orange" style="font-size: small;">
+    {{ global.getEmail() }}
+  </ion-text>
   <ion-button color="orange" (click)="logOut()" expand="block" fill="outline" style="--border-radius: 15px;">
     Log Out
   </ion-button>

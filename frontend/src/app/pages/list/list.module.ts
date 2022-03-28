@@ -7,6 +7,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { BackendService } from 'src/services/backend.service';
 import { AddModalComponent } from './add-modal/add-modal.component';
 import { EditModalComponent } from './edit-modal/edit-modal.component';
+import { GlobalService } from 'src/services/global.service';
 
 const routes: Routes = [
   {
@@ -22,6 +23,6 @@ const routes: Routes = [
     RouterModule.forChild(routes)
   ],
   declarations: [ListPage, AddModalComponent, EditModalComponent],
-  providers: [BackendService]
+  providers: [BackendService, GlobalService]
 })
 export class ListPageModule { }

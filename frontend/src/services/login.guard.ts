@@ -12,10 +12,11 @@ export class LoginGuard implements CanActivate {
     state: RouterStateSnapshot
 
   ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+
     let email = localStorage.getItem('email')
-    if (email != "null" && email != null) {
-      console.log("l'email è: ", email);
-      this.global.email = email
+    if (email) {
+      email = email.trim()
+      console.log("l'email è:", email);
       return true
     }
 

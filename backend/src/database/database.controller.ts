@@ -1,4 +1,5 @@
 import { Body, Controller, Get, Query, Post } from '@nestjs/common';
+import { randomUUID } from 'crypto';
 import { map } from 'rxjs';
 import { CardService } from 'src/cards/cards.service';
 import { ScrapeService } from 'src/scrape.service';
@@ -24,31 +25,28 @@ export class DBController {
 
   @Post('create')
   async create(@Body() cardDto: CardDto) {
-    // console.log("create INIT", cardDto);
-
-
-    //creo la carta nel db
-    let log = await this.dbService.create(cardDto)
+    console.log("create INIT", cardDto);
 
     //richiedo il link a scryfall
-    this.cardService.getCardLink(cardDto.name).subscribe(async link => {
+    await this.cardService.getCardLink(cardDto.name).subscribe(async link => {
       // console.log(link);
 
       //get link and card price
       cardDto.link = link
-      cardDto.price = await this.scrapeService.scapeData(link)
+      cardDto.price = await this.scrapeService.scrapeData(link)
 
       //update the db with the prices and links
-      this.dbService.update(cardDto)
+      await this.dbService.create(cardDto)
     })
+
+    return 200
   }
 
   @Post('update')
   async update(@Body() cardDto: CardDto) {
-    // console.log("update INIT", cardDto);
+    console.log("update INIT", cardDto);
 
-    console.log(cardDto);
-    cardDto.price = await this.scrapeService.scapeData(cardDto.link)
+    cardDto.price = await this.scrapeService.scrapeData(cardDto.link)
 
     console.log("updated ", cardDto);
 
