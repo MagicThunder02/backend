@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { AlertController, ModalController } from '@ionic/angular';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { AlertController, LoadingController, ModalController } from '@ionic/angular';
 import { BackendService } from 'src/services/backend.service';
 
 @Component({
@@ -10,8 +10,13 @@ import { BackendService } from 'src/services/backend.service';
 export class EditModalComponent implements OnInit {
 
   @Input() card
+  @Input() updater
 
-  constructor(public modalController: ModalController, private backend: BackendService, private alertController: AlertController) { }
+  constructor(
+    public modalController: ModalController,
+    private backend: BackendService,
+    private alertController: AlertController,
+  ) { }
 
   ngOnInit() { }
 
@@ -24,12 +29,18 @@ export class EditModalComponent implements OnInit {
     }
     else {
 
-      this.backend.update(this.card).subscribe()
 
-      this.modalController.dismiss('OK')
+      this.backend.update(this.card).subscribe(result => {
+        console.log("finished", result);
+        // this.modalController.dismiss(result)
+
+        this.updater.emit(result)
+      })
+      this.modalController.dismiss()
     }
 
   }
+
 
   async presentNoThresholdAlert() {
     const alert = await this.alertController.create({

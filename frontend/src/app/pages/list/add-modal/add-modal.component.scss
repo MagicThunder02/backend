@@ -14,10 +14,12 @@ ion-searchbar {
 }
 
 .item-has-focus {
-    // --highlight-color-focused: transparent;
     --border-width: 0 0 0 0; 
     --inner-border-width: 0; 
     --show-full-highlight: 0; 
     --show-inset-highlight: 0;
     border: 2px solid var(--ion-color-orange);
+}
+ion-input {
+     caret-color: var(--ion-color-dark);
 }

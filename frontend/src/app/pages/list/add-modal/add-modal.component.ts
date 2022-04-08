@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { AlertController, ModalController } from '@ionic/angular';
 import { BackendService } from 'src/services/backend.service';
 
@@ -11,6 +11,7 @@ export class AddModalComponent implements OnInit {
 
   public cards = []
   public threshold: number
+  @Input() updater
 
   constructor(public modalController: ModalController, private backend: BackendService, private alertController: AlertController) { }
 
@@ -36,8 +37,11 @@ export class AddModalComponent implements OnInit {
 
       this.backend.create(this.cards[0], this.threshold).subscribe((result) => {
         console.log("finished", result);
-        this.modalController.dismiss('OK')
+
+        this.updater.emit(result)
+
       })
+      this.modalController.dismiss()
     }
 
   }

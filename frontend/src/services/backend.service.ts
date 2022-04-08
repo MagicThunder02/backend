@@ -73,19 +73,13 @@ export class BackendService {
     let URL = this.apiUrl() + `/db/update`
     let body = new HttpParams();
 
-    console.log('card', card, Object.keys(card));
 
     Object.keys(card).forEach(key => {
       body = body.append(key, card[key])
       console.log(key, card[key]);
     })
-    // body = body.append('email', this.global.getEmail());
-    // body = body.append('name', card.name);
-    // body = body.append('_id', card._id);
-    // body = body.append('threshold', this.parsePrice(card.threshold));
 
     console.log(URL);
-    console.log('body', body);
 
     return this.http.post<any>(URL, body, { headers: this.options })
       .pipe(

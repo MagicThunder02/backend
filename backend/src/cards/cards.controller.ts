@@ -9,13 +9,11 @@ export class CardsController {
 
   @Get('autocomplete')
   async findAutocomplete(@Query() query) {
-    console.log(query.search);
     return await this.cardService.getAutocomplete(query.search)
   }
 
   @Get('search')
   async searchCard(@Query() query) {
-    console.log(query.search);
     return await this.cardService.getCard(query.search)
   }
 

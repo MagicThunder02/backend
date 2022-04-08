@@ -1,5 +1,5 @@
 # FROM node:alpine
-FROM node:alpine
+FROM node:alpine as magic-intermediate
 
 EXPOSE 8080
 
@@ -22,7 +22,8 @@ ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true \
     PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
 
 # Puppeteer v10.0.0 works with Chromium 92.
-RUN yarn add puppeteer@10.0.0
+RUN npm add puppeteer@10.0.0
+# RUN yarn add puppeteer@10.0.0
 
 # Add user so we don't need --no-sandbox.
 # RUN addgroup -S pptruser && adduser -S -G pptruser pptruser \
@@ -35,7 +36,7 @@ RUN yarn add puppeteer@10.0.0
 RUN npm i
 
 #cancellare magic-intermediate se vengono cambiati i pacchetti
-# FROM magic-intermediate
+FROM magic-intermediate
 
 COPY ./dist ./dist
 COPY ./client ./client

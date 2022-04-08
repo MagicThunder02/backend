@@ -17,3 +17,14 @@ ion-searchbar {
     border: 2px solid var(--ion-color-orange);
     border-radius: 15px;
 }
+
+.item-has-focus {
+    --border-width: 0 0 0 0; 
+    --inner-border-width: 0; 
+    --show-full-highlight: 0; 
+    --show-inset-highlight: 0;
+    border: 2px solid var(--ion-color-orange);
+}
+ion-input {
+     caret-color: var(--ion-color-dark);
+}

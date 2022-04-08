@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { BackendService } from 'src/services/backend.service';
 import { GlobalService } from 'src/services/global.service';
@@ -13,12 +13,25 @@ import { EditModalComponent } from './edit-modal/edit-modal.component';
 export class ListPage {
 
   cards = []
+  updater: EventEmitter<any> = new EventEmitter()
 
   constructor(
     private backend: BackendService,
-    private modalController: ModalController
-  ) {
+    private modalController: ModalController,
 
+  ) {
+    this.updater.subscribe(event => {
+      let card = this.cards.find(card => card._id == event._id)
+      if (card) {
+        console.log("updated", card, event);
+        card = event
+      }
+      else {
+        console.log("added", card, event);
+        this.cards.push(event)
+      }
+
+    })
   }
 
   ionViewWillEnter() {
@@ -45,18 +58,12 @@ export class ListPage {
     const modal = await this.modalController.create({
       component: AddModalComponent,
       cssClass: 'fullscreen',
+      componentProps: {
+        updater: this.updater
+      }
 
     });
     modal.onDidDismiss().then((result) => {
-      console.log(result);
-      if (result.data == "OK") {
-        //carica la nuova card
-        this.listCards()
-        //dopo tre secondi carica il prezzo
-        setTimeout(() => {
-          this.listCards()
-        }, 5000);
-      }
 
     });
 
@@ -64,24 +71,22 @@ export class ListPage {
   }
 
 
-  async presentEditModal(card) {
+  async presentEditModal(card, item) {
     const modal = await this.modalController.create({
       component: EditModalComponent,
       cssClass: 'fullscreen',
       componentProps: {
-        card: card
+        card: card,
+        updater: this.updater
       }
+
     });
 
     modal.onDidDismiss().then((result) => {
-      console.log(result);
-      if (result.data == "OK") {
-        //carica la nuova card
-        this.listCards();
-      }
+
     });
 
-    return await modal.present();
+    return await modal.present().then(() => item.close());
   }
 
 

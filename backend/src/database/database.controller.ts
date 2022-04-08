@@ -25,33 +25,34 @@ export class DBController {
 
   @Post('create')
   async create(@Body() cardDto: CardDto) {
-    console.log("create INIT", cardDto);
 
     //richiedo il link a scryfall
-    await this.cardService.getCardLink(cardDto.name).subscribe(async link => {
-      // console.log(link);
+    return this.cardService.getCardLink(cardDto.name).pipe(
+      map(async link => {
+        // console.log(link);
 
-      //get link and card price
-      cardDto.link = link
-      cardDto.price = await this.scrapeService.scrapeData(link)
+        //get link and card price
+        cardDto.link = link
+        cardDto.price = await this.scrapeService.scrapeData(link)
 
-      //update the db with the prices and links
-      await this.dbService.create(cardDto)
-    })
+        //update the db with the prices and links
+        console.log("Created", cardDto.name);
 
-    return 200
+        return await this.dbService.create(cardDto)
+      }))
   }
 
   @Post('update')
   async update(@Body() cardDto: CardDto) {
-    console.log("update INIT", cardDto);
 
     cardDto.price = await this.scrapeService.scrapeData(cardDto.link)
 
-    console.log("updated ", cardDto);
+    console.log("Updated ", cardDto.name);
 
     //update the db with the prices and links
-    return this.dbService.update(cardDto)
+
+
+    return await this.dbService.update(cardDto)
   }
 
   @Post('delete')
