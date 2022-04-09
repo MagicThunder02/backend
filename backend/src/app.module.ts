@@ -8,17 +8,19 @@ import { ScrapeService } from './scrape.service';
 import { MailerModule } from '@nestjs-modules/mailer';
 import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
 import { HttpModule } from '@nestjs/axios';
-import { DBModule } from './database/database.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
+import { UserModule } from './users/users.module';
+import { ConfigModule } from '@nestjs/config';
 
 
 @Module({
   imports: [
     CardsModule,
-    DBModule,
+    UserModule,
     HttpModule,
     ScheduleModule.forRoot(),
+    ConfigModule.forRoot(),
     MongooseModule.forRoot(process.env.DBPATH),
     MailerModule.forRoot({
       transport: {
@@ -43,7 +45,7 @@ import { join } from 'path';
     }),
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'client'),
-      exclude: ['/cards*', '/db*'],
+      exclude: ['/cards*', '/users*'],
     }),
   ],
   controllers: [AppController],

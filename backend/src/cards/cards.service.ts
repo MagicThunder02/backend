@@ -1,12 +1,41 @@
+import { Model } from 'mongoose';
 import { Injectable } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
 import { catchError, filter, map, Observable } from 'rxjs';
 import { ScrapeService } from 'src/scrape.service';
+import { InjectModel } from '@nestjs/mongoose';
+import { CardDto } from 'src/database/dto/card.dto';
+import { Card, CardDocument } from 'src/database/schemas/card.schema';
 
 
 @Injectable()
 export class CardService {
-  constructor(public httpService: HttpService, public scrapeService: ScrapeService) { }
+  constructor(public httpService: HttpService, public scrapeService: ScrapeService, @InjectModel(Card.name) private cardModel: Model<CardDocument>) { }
+
+
+  async create(cardDto: CardDto): Promise<Card> {
+    const createdCard = new this.cardModel(cardDto);
+    return await createdCard.save();
+  }
+
+  async update(cardDto: CardDto): Promise<any> {
+    return this.cardModel.findOneAndUpdate({ _id: cardDto._id }, cardDto, { returnDocument: "after" }).exec();
+  }
+
+  async delete(body): Promise<any> {
+    return this.cardModel.deleteMany(body).exec();
+  }
+
+  async findAll(): Promise<Card[]> {
+    return this.cardModel.find().exec();
+  }
+
+  async findByEmail(email): Promise<Card[]> {
+    return this.cardModel.find({ email: email }).exec();
+  }
+
+  //---------------------------------------------------------------------------------------------
+  //---------------------------------------------------------------------------------------------
 
   public getAutocomplete(search: string) {
 

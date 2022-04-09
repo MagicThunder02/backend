@@ -25,7 +25,7 @@ export class BackendService {
 
   public list() {
     let email = localStorage.getItem('email')
-    let URL = this.apiUrl() + `/db/email?email=${email}`
+    let URL = this.apiUrl() + `/cards/email?email=${email}`
     console.log(URL);
 
 
@@ -35,9 +35,9 @@ export class BackendService {
       );
   }
 
-  public delete(name) {
+  public deleteCard(name) {
 
-    let URL = this.apiUrl() + `/db/delete`
+    let URL = this.apiUrl() + `/cards/delete`
     let body = new HttpParams();
 
     body = body.append('email', this.global.getEmail());
@@ -51,9 +51,9 @@ export class BackendService {
       );
   }
 
-  public create(name, threshold) {
+  public createCard(name, threshold) {
 
-    let URL = this.apiUrl() + `/db/create`
+    let URL = this.apiUrl() + `/cards/create`
     let body = new HttpParams();
 
     body = body.append('email', this.global.getEmail());
@@ -68,9 +68,9 @@ export class BackendService {
       );
   }
 
-  public update(card) {
+  public updateCard(card) {
 
-    let URL = this.apiUrl() + `/db/update`
+    let URL = this.apiUrl() + `/cards/update`
     let body = new HttpParams();
 
 

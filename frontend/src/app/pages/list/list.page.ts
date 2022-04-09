@@ -46,7 +46,7 @@ export class ListPage {
   }
 
   public deleteCards(name) {
-    this.backend.delete(name).subscribe(data => {
+    this.backend.deleteCard(name).subscribe(data => {
       console.log(data);
     })
 

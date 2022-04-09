@@ -27,7 +27,15 @@
               <ion-item color="light">
                 <ion-icon name="person" slot="start"></ion-icon>
                 <ion-label position="floating"><i>Email</i></ion-label>
-                <ion-input type="text" inputmode="text" [(ngModel)]="email" clear-input="true" (keyup.enter)="login()">
+                <ion-input type="text" inputmode="text" [(ngModel)]="email" clear-input="true">
+                </ion-input>
+              </ion-item>
+
+              <ion-item color="light">
+                <ion-icon name="person" slot="start"></ion-icon>
+                <ion-label position="floating"><i>Password</i></ion-label>
+                <ion-input type="text" inputmode="text" [(ngModel)]="password" clear-input="true"
+                  (keyup.enter)="login()">
                 </ion-input>
               </ion-item>
 

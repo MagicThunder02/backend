@@ -30,7 +30,7 @@ export class EditModalComponent implements OnInit {
     else {
 
 
-      this.backend.update(this.card).subscribe(result => {
+      this.backend.updateCard(this.card).subscribe(result => {
         console.log("finished", result);
         // this.modalController.dismiss(result)
 

@@ -35,7 +35,7 @@ export class AddModalComponent implements OnInit {
     }
     else {
 
-      this.backend.create(this.cards[0], this.threshold).subscribe((result) => {
+      this.backend.createCard(this.cards[0], this.threshold).subscribe((result) => {
         switch (result.result) {
           case "CARD_NOT_FOUND":
             this.presentNotFoundAlert(this.cards[0])

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import CryptoJS from 'crypto-js';
 
 @Component({
   selector: 'app-login',
@@ -9,6 +10,7 @@ import { Router } from '@angular/router';
 export class LoginPage {
 
   public email: string
+  public password: string
 
   constructor(public router: Router) { }
 

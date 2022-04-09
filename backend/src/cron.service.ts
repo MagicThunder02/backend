@@ -1,21 +1,25 @@
 import { MailerService } from '@nestjs-modules/mailer';
 import { Injectable } from '@nestjs/common';
 import { Cron, CronExpression } from '@nestjs/schedule';
-import { DBService } from './database/database.service';
+import { CardService } from './cards/cards.service';
 import { CardDto } from './database/dto/card.dto';
 import { ScrapeService } from './scrape.service';
 
 @Injectable()
 export class CronService {
 
-  constructor(public scrapeService: ScrapeService, public dbService: DBService, public mailerService: MailerService) {
+  constructor(
+    private scrapeService: ScrapeService,
+    private cardService: CardService,
+    private mailerService: MailerService
+  ) {
 
   }
 
   @Cron(CronExpression.EVERY_DAY_AT_NOON)
   async handleCron() {
 
-    let cards = await this.dbService.findAll()
+    let cards = await this.cardService.findAll()
 
     cards.forEach(async (card: CardDto) => {
 
@@ -43,7 +47,7 @@ export class CronService {
           });
       }
 
-      this.dbService.update(card)
+      this.cardService.update(card)
     })
   }
 }

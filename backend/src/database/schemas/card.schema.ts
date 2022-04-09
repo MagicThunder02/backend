@@ -7,9 +7,6 @@ export type CardDocument = Card & Document;
 export class Card {
 
     @Prop()
-    id: string;
-
-    @Prop()
     email: string;
 
     @Prop()

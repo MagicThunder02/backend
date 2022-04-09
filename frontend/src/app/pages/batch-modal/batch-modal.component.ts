@@ -60,7 +60,7 @@ export class BatchModalComponent implements OnInit {
       this.modalController.dismiss()
 
       //creo la carta
-      this.backend.create(name, threshold).subscribe((result) => {
+      this.backend.createCard(name, threshold).subscribe((result) => {
 
         console.log(result);
 
