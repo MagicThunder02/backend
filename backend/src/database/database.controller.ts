@@ -1,6 +1,6 @@
-import { Body, Controller, Get, Query, Post } from '@nestjs/common';
+import { Body, Controller, Get, Query, Post, HttpException } from '@nestjs/common';
 import { randomUUID } from 'crypto';
-import { map } from 'rxjs';
+import { catchError, map } from 'rxjs';
 import { CardService } from 'src/cards/cards.service';
 import { ScrapeService } from 'src/scrape.service';
 import { DBService } from './database.service';
@@ -28,18 +28,32 @@ export class DBController {
 
     //richiedo il link a scryfall
     return this.cardService.getCardLink(cardDto.name).pipe(
-      map(async link => {
-        // console.log(link);
+      map(async card => {
 
-        //get link and card price
-        cardDto.link = link
-        cardDto.price = await this.scrapeService.scrapeData(link)
+        cardDto.link = card.purchase_uris.cardmarket
+        cardDto.name = card.name
 
-        //update the db with the prices and links
-        console.log("Created", cardDto.name);
+        if (cardDto.link != "CARD_NOT_FOUND") {
+          //ottengo il prezzo
+          let price = await this.scrapeService.scrapeData(cardDto.link)
 
-        return await this.dbService.create(cardDto)
-      }))
+          //se il prezzo è trovato crea il record
+          if (price != "PRICE_NOT_FOUND") {
+            cardDto.price = price
+            console.log("Created", cardDto.name);
+            return { "statusCode": 200, result: "OK", message: await this.dbService.create(cardDto) }
+
+          } else {
+            return { "statusCode": 200, result: "PRICE_NOT_FOUND" }
+          }
+        }
+        else {
+          return { "statusCode": 200, result: "CARD_NOT_FOUND" }
+        }
+
+
+      })
+    )
   }
 
   @Post('update')

@@ -1,9 +1,9 @@
 import { Component, EventEmitter } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { BackendService } from 'src/services/backend.service';
-import { GlobalService } from 'src/services/global.service';
-import { AddModalComponent } from './add-modal/add-modal.component';
-import { EditModalComponent } from './edit-modal/edit-modal.component';
+import { AddModalComponent } from '../add-modal/add-modal.component';
+import { BatchModalComponent } from '../batch-modal/batch-modal.component';
+import { EditModalComponent } from '../edit-modal/edit-modal.component';
 
 @Component({
   selector: 'app-list',
@@ -82,11 +82,19 @@ export class ListPage {
 
     });
 
-    modal.onDidDismiss().then((result) => {
+    return await modal.present().then(() => item.close());
+  }
 
+  async presentBatchModal() {
+    const modal = await this.modalController.create({
+      component: BatchModalComponent,
+      cssClass: 'fullscreen',
+      componentProps: {
+        updater: this.updater
+      }
     });
 
-    return await modal.present().then(() => item.close());
+    return await modal.present();
   }
 
 

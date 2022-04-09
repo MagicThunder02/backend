@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit } from '@angular/core';
 import { AlertController, ModalController } from '@ionic/angular';
 import { BackendService } from 'src/services/backend.service';
 
@@ -36,9 +36,21 @@ export class AddModalComponent implements OnInit {
     else {
 
       this.backend.create(this.cards[0], this.threshold).subscribe((result) => {
-        console.log("finished", result);
+        switch (result.result) {
+          case "CARD_NOT_FOUND":
+            this.presentNotFoundAlert(this.cards[0])
 
-        this.updater.emit(result)
+            break;
+          case "PRICE_NOT_FOUND":
+            this.presentPriceAlert(this.cards[0])
+            break;
+
+          case "OK":
+          default:
+            console.log(result);
+            this.updater.emit(result.message)
+            break;
+        }
 
       })
       this.modalController.dismiss()
@@ -71,4 +83,23 @@ export class AddModalComponent implements OnInit {
     await alert.present();
   }
 
+  async presentNotFoundAlert(name) {
+    const alert = await this.alertController.create({
+      header: 'Errore',
+      message: `La carta "${name}" non è stata trovata`,
+      mode: "ios",
+      buttons: ['OK']
+    });
+    await alert.present();
+  }
+
+  async presentPriceAlert(name) {
+    const alert = await this.alertController.create({
+      header: 'Errore',
+      message: `Il prezzo della carta "${name}" non è stata trovato`,
+      mode: "ios",
+      buttons: ['OK']
+    });
+    await alert.present();
+  }
 }

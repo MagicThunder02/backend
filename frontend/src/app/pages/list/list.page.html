@@ -8,6 +8,12 @@
 
 <ion-content [fullscreen]="true">
 
+  <ion-fab vertical="bottom" horizontal="start" slot="fixed">
+    <ion-fab-button color="orange" (click)="presentBatchModal()">
+      <ion-icon name="copy" size="large" color="light"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button color="orange" (click)="presentAddModal()">
       <ion-icon name="add" size="large" color="light"></ion-icon>

@@ -58,7 +58,7 @@ export class ScrapeService {
 
     } catch (error) {
       console.log(error);
-      return 666
+      return "PRICE_NOT_FOUND"
     }
   }
 }
