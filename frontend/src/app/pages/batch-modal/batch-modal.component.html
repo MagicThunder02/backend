@@ -10,7 +10,8 @@
 <ion-content [fullscreen]="true">
 
   <ion-item>
-    <ion-textarea color="dark" autoGrow [(ngModel)]="batch"></ion-textarea>
+    <ion-textarea color="dark" [placeholder]="placeholder" autoGrow [(ngModel)]="batch">
+    </ion-textarea>
   </ion-item>
 
 </ion-content>

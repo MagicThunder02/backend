@@ -20,5 +20,6 @@ const routes: Routes = [
     RouterModule.forChild(routes)
   ],
   declarations: [LoginPage],
+  providers: [BackendService]
 })
 export class LoginPageModule { }

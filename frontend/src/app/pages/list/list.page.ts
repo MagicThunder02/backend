@@ -39,7 +39,7 @@ export class ListPage {
   }
 
   public listCards() {
-    this.backend.list().subscribe(data => {
+    this.backend.listCards().subscribe(data => {
       console.log(data);
       this.cards = data
     })

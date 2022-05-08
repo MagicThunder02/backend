@@ -22,6 +22,11 @@ export class UserService {
     return this.userModel.deleteMany(body).exec();
   }
 
+
+  async findByEmail(email): Promise<User> {
+    return this.userModel.findOne({ email: email }).exec();
+  }
+
   async findAllUsers(): Promise<User[]> {
     return this.userModel.find().exec();
   }

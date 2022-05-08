@@ -36,7 +36,7 @@ import { ConfigModule } from '@nestjs/config';
         from: '"nest-modules" <modules@nestjs.com>',
       },
       template: {
-        dir: process.cwd() + '/src/templates/',
+        dir: process.cwd() + '/dist/assets/templates/',
         adapter: new HandlebarsAdapter(),
         options: {
           strict: true,

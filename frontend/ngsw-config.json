@@ -3,11 +3,11 @@
   "index": "/index.html",
   "assetGroups": [
     {
-      "name": "app",
+      "name": "MTG-Toolbox",
       "installMode": "prefetch",
       "resources": {
         "files": [
-          "/favicon.ico",
+          "/magic-icon.jpg",
           "/index.html",
           "/manifest.webmanifest",
           "/*.css",

@@ -31,7 +31,7 @@ export class CronService {
           to: card.email, // list of receivers
           from: 'matteo.savina@gmail.com', // sender address
           subject: `${card.name} è sottoprezzata`, // Subject line
-          template: '/mail',
+          template: 'foundCard',
           context: {
             name: card.name,
             price: card.price,

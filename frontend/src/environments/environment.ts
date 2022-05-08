@@ -7,7 +7,7 @@ export const environment = {
   // frontend: 'https://localhost:8100',
   // backend: 'https://localhost:8080',
   frontend: 'http://localhost:8100',
-  backend: 'http://192.168.1.52:8080',
+  backend: 'http://192.168.1.58:8090',
 };
 
 /*

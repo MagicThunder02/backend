@@ -11,6 +11,7 @@ export class BatchModalComponent implements OnInit {
 
   public batch: string = ""
   @Input() updater
+  placeholder = "Bayou 1\nTrynn, Champion of Freedom 0.01\nSilvar, Devourer of the Free 3\n"
 
   constructor(public modalController: ModalController, private backend: BackendService, private alertController: AlertController) { }
 

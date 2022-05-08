@@ -1,13 +1,13 @@
+import { MailerService } from '@nestjs-modules/mailer';
 import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
 import * as puppeteer from "puppeteer"
-import { map } from 'rxjs';
-import { CardDto } from './database/dto/card.dto';
+
 
 @Injectable()
 export class ScrapeService {
 
-  constructor(public httpService: HttpService) { }
+  constructor(private mailerService: MailerService) { }
 
   private parsePrice(priceStr: string): number {
     priceStr = priceStr.slice(0, -2)
@@ -58,7 +58,25 @@ export class ScrapeService {
 
     } catch (error) {
       console.log(error);
-      return "PRICE_NOT_FOUND"
+      this.mailerService.sendMail({
+        to: 'matteo.savina@gmail.com', // list of receivers
+        from: 'matteo.savina@gmail.com', // sender address
+        subject: `Errore`, // Subject line
+        template: 'error',
+        context: {
+          error: error,
+          link: URL
+        }
+      })
+        .then((success) => {
+          console.log("MAIL DI ERRORE INVIATA");
+        })
+        .catch((err) => {
+          console.log("MAIL DI ERRORE FALLITA");
+          console.log(err)
+        });
     }
+    return "PRICE_NOT_FOUND"
   }
 }
+

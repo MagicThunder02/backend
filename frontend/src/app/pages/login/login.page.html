@@ -24,20 +24,22 @@
           </ion-row>
           <ion-row>
             <ion-col size="12" class="center">
-              <ion-item color="light">
-                <ion-icon name="person" slot="start"></ion-icon>
-                <ion-label position="floating"><i>Email</i></ion-label>
-                <ion-input type="text" inputmode="text" [(ngModel)]="email" clear-input="true">
-                </ion-input>
-              </ion-item>
+              <ion-list class="ion-no-padding">
+                <ion-item color="light">
+                  <ion-icon name="person" slot="start"></ion-icon>
+                  <ion-label position="floating"><i>Email</i></ion-label>
+                  <ion-input type="text" inputmode="text" enterkeyhint="next" [(ngModel)]="email" clear-input="true">
+                  </ion-input>
+                </ion-item>
 
-              <ion-item color="light">
-                <ion-icon name="person" slot="start"></ion-icon>
-                <ion-label position="floating"><i>Password</i></ion-label>
-                <ion-input type="text" inputmode="text" [(ngModel)]="password" clear-input="true"
-                  (keyup.enter)="login()">
-                </ion-input>
-              </ion-item>
+                <ion-item color="light">
+                  <ion-icon name="lock-closed" slot="start"></ion-icon>
+                  <ion-label position="floating"><i>Password</i></ion-label>
+                  <ion-input type="text" inputmode="text" [(ngModel)]="password" clear-input="true"
+                    (keyup.enter)="login()">
+                  </ion-input>
+                </ion-item>
+              </ion-list>
 
             </ion-col>
           </ion-row>
